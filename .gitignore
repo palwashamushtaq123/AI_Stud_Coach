@@ -1,0 +1,12 @@
+.env
+venv/
+.venv/
+__pycache__/
+*.pyc
+.vscode/ 
+
+# Iska matlab:
+
+# .env → API key hide rahegi
+# venv/ / .venv/ → virtual environment GitHub par nahi jayega
+# __pycache__/ + *.pyc → Python temporary files nahi jayengi

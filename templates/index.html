@@ -1,0 +1,738 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Study Coach</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="background-shape shape-one"></div>
+    <div class="background-shape shape-two"></div>
+
+    <div class="page-container">
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="brand-icon">🎓</div>
+
+                <div>
+                    <h1>AI Study Coach</h1>
+                    <p>Personalized learning powered by Gemini AI</p>
+                </div>
+
+            </div>
+
+            <div class="gemini-status">
+                <span class="status-dot"></span>
+                Gemini AI
+                <span class="online">● Online</span>
+            </div>
+
+        </header>
+
+
+        <!-- MAIN -->
+        <main class="main-content">
+
+
+            <!-- LEFT PANEL -->
+            <section class="input-panel">
+
+                <div class="section-title">
+
+                    <div class="title-icon">👤</div>
+
+                    <div>
+                        <h2>Student Information</h2>
+                        <p>Tell us about your exam and learning needs.</p>
+                    </div>
+
+                </div>
+
+
+                <form id="studyForm">
+
+
+                    <!-- NAME + SUBJECT -->
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="name">Student Name</label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="e.g. Ahmed"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="subject">Subject</label>
+
+                            <input
+                                type="text"
+                                id="subject"
+                                placeholder="e.g. Python"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- WEAK TOPICS -->
+                    <div class="form-group">
+
+                        <label for="weak_topics">
+                            Weak Topics
+                        </label>
+
+                        <textarea
+                            id="weak_topics"
+                            rows="3"
+                            placeholder="e.g. Loops, Functions, Debugging"
+                            required
+                        ></textarea>
+
+                        <span class="input-hint">
+                            Separate multiple topics with commas
+                        </span>
+
+                    </div>
+
+
+                    <!-- DAYS + HOURS -->
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="days_left">
+                                📅 Days Remaining
+                            </label>
+
+                            <input
+                                type="number"
+                                id="days_left"
+                                min="1"
+                                placeholder="5"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="hours">
+                                ⏱️ Study Hours / Day
+                            </label>
+
+                            <input
+                                type="number"
+                                id="hours"
+                                min="0.5"
+                                step="0.5"
+                                placeholder="2"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SKILL LEVEL -->
+                    <div class="form-group">
+
+                        <label for="skill_level">
+                            🎯 Current Skill Level
+                        </label>
+
+                        <select id="skill_level" required>
+
+                            <option value="">
+                                Select your skill level
+                            </option>
+
+                            <option value="Beginner">
+                                Beginner
+                            </option>
+
+                            <option value="Intermediate">
+                                Intermediate
+                            </option>
+
+                            <option value="Advanced">
+                                Advanced
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TECHNIQUES -->
+                    <div class="technique-section">
+
+                        <div class="technique-heading">
+
+                            <div>
+                                <h3>🧠 Prompting Technique</h3>
+
+                                <p>
+                                    Choose how Gemini should generate your study plan.
+                                </p>
+                            </div>
+
+                            <span class="required-badge">
+                                Required
+                            </span>
+
+                        </div>
+
+
+                        <div class="techniques">
+
+
+                            <!-- ZERO SHOT -->
+                            <label class="technique-option">
+
+                                <input
+                                    type="radio"
+                                    name="technique"
+                                    value="zero_shot"
+                                    checked
+                                >
+
+                                <div class="technique-card zero">
+
+                                    <div class="technique-icon">
+                                        01
+                                    </div>
+
+                                    <div class="technique-text">
+
+                                        <strong>Zero-Shot</strong>
+
+                                        <span>
+                                            No examples
+                                        </span>
+
+                                        <small>
+                                            Gemini creates the plan directly
+                                            from your information.
+                                        </small>
+
+                                    </div>
+
+                                    <div class="check">✓</div>
+
+                                </div>
+
+                            </label>
+
+
+                            <!-- FEW SHOT -->
+                            <label class="technique-option">
+
+                                <input
+                                    type="radio"
+                                    name="technique"
+                                    value="few_shot"
+                                >
+
+                                <div class="technique-card few">
+
+                                    <div class="technique-icon">
+                                        02
+                                    </div>
+
+                                    <div class="technique-text">
+
+                                        <strong>Few-Shot</strong>
+
+                                        <span>
+                                            Uses examples
+                                        </span>
+
+                                        <small>
+                                            Gemini follows example study plans
+                                            before creating a new one.
+                                        </small>
+
+                                    </div>
+
+                                    <div class="check">✓</div>
+
+                                </div>
+
+                            </label>
+
+
+                            <!-- STRUCTURED -->
+                            <label class="technique-option">
+
+                                <input
+                                    type="radio"
+                                    name="technique"
+                                    value="Chain_of_thoughts"
+                                >
+
+                                <div class="technique-card structured">
+
+                                    <div class="technique-icon">
+                                        03
+                                    </div>
+
+                                    <div class="technique-text">
+
+                                        <strong>
+                                            Structured Reasoning
+                                        </strong>
+
+                                        <span>
+                                            Systematic analysis
+                                        </span>
+
+                                        <small>
+                                            Gemini organizes priorities,
+                                            activities and the final schedule.
+                                        </small>
+
+                                    </div>
+
+                                    <div class="check">✓</div>
+
+                                </div>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+                    <div class="button-row">
+
+                        <button
+                            type="submit"
+                            class="generate-btn"
+                            id="generateBtn"
+                        >
+
+                            <span id="buttonText">
+                                ✨ Generate Study Plan
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="clear-btn"
+                            id="clearBtn"
+                        >
+
+                            🧹 Clear All
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- RIGHT PANEL -->
+            <section class="result-panel">
+
+
+                <div class="result-header">
+
+                    <div>
+
+                        <div class="result-label">
+                            AI OUTPUT
+                        </div>
+
+                        <h2>Study Plan</h2>
+
+                        <p id="resultSubtitle">
+                            Your personalized plan will appear here.
+                        </p>
+
+                    </div>
+
+                    <div class="ai-circle">
+                        ✨
+                    </div>
+
+                </div>
+
+
+                <!-- EMPTY -->
+                <div
+                    id="emptyState"
+                    class="empty-state"
+                >
+
+                    <div class="book-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Ready to build your plan?
+                    </h3>
+
+                    <p>
+                        Enter your academic information,
+                        select a prompting technique,
+                        and let Gemini create your personalized study plan.
+                    </p>
+
+                    <div class="mini-features">
+
+                        <span>🎯 Personalized</span>
+                        <span>📅 Day-by-Day</span>
+                        <span>🤖 Gemini AI</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOADING -->
+                <div
+                    id="loading"
+                    class="loading hidden"
+                >
+
+                    <div class="loader"></div>
+
+                    <h3>
+                        Creating your study plan...
+                    </h3>
+
+                    <p>
+                        Gemini is analyzing your learning needs.
+                    </p>
+
+                </div>
+
+
+                <!-- RESULT -->
+                <div
+                    id="resultContainer"
+                    class="result-container hidden"
+                >
+
+                    <div class="result-info">
+
+                        <span id="selectedTechnique"></span>
+
+                        <span id="studentInfo"></span>
+
+                    </div>
+
+                    <div
+                        id="studyPlan"
+                        class="study-plan"
+                    ></div>
+
+                </div>
+
+
+                <!-- ERROR -->
+                <div
+                    id="errorContainer"
+                    class="error-container hidden"
+                ></div>
+
+            </section>
+
+        </main>
+
+
+        <footer>
+            AI Study Coach • Prompt Engineering Assignment • Powered by Gemini
+        </footer>
+
+    </div>
+
+
+    <script>
+
+        const form = document.getElementById("studyForm");
+
+        const generateBtn =
+            document.getElementById("generateBtn");
+
+        const buttonText =
+            document.getElementById("buttonText");
+
+        const clearBtn =
+            document.getElementById("clearBtn");
+
+        const emptyState =
+            document.getElementById("emptyState");
+
+        const loading =
+            document.getElementById("loading");
+
+        const resultContainer =
+            document.getElementById("resultContainer");
+
+        const errorContainer =
+            document.getElementById("errorContainer");
+
+        const studyPlan =
+            document.getElementById("studyPlan");
+
+        const selectedTechnique =
+            document.getElementById("selectedTechnique");
+
+        const studentInfo =
+            document.getElementById("studentInfo");
+
+        const resultSubtitle =
+            document.getElementById("resultSubtitle");
+
+
+        // -----------------------------
+        // Generate Study Plan
+        // -----------------------------
+
+        form.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const technique =
+                    document.querySelector(
+                        'input[name="technique"]:checked'
+                    ).value;
+
+
+                const data = {
+
+                    name:
+                        document.getElementById("name").value,
+
+                    subject:
+                        document.getElementById("subject").value,
+
+                    weak_topics:
+                        document.getElementById("weak_topics").value,
+
+                    days_left:
+                        parseInt(
+                            document.getElementById("days_left").value
+                        ),
+
+                    hours:
+                        parseFloat(
+                            document.getElementById("hours").value
+                        ),
+
+                    skill_level:
+                        document.getElementById("skill_level").value,
+
+                    technique: technique
+
+                };
+
+
+                emptyState.classList.add("hidden");
+
+                resultContainer.classList.add("hidden");
+
+                errorContainer.classList.add("hidden");
+
+                loading.classList.remove("hidden");
+
+                generateBtn.disabled = true;
+
+                buttonText.textContent =
+                    "Generating...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/studyplan",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(data)
+                            }
+                        );
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (result.error) {
+
+                        throw new Error(
+                            result.error
+                        );
+
+                    }
+
+
+                    loading.classList.add("hidden");
+
+                    resultContainer.classList.remove(
+                        "hidden"
+                    );
+
+
+                    selectedTechnique.textContent =
+                        formatTechnique(
+                            result.technique
+                        );
+
+
+                    studentInfo.textContent =
+                        `${result.student_name} • ${result.subject}`;
+
+
+                    resultSubtitle.textContent =
+                        "Personalized recommendations generated by Gemini AI.";
+
+
+                    studyPlan.textContent =
+                        result.study_plan;
+
+                }
+
+
+                catch (error) {
+
+                    loading.classList.add("hidden");
+
+                    errorContainer.classList.remove(
+                        "hidden"
+                    );
+
+                    errorContainer.textContent =
+                        "⚠️ Error: " +
+                        error.message;
+
+                }
+
+
+                finally {
+
+                    generateBtn.disabled = false;
+
+                    buttonText.textContent =
+                        "✨ Generate Study Plan";
+
+                }
+
+            }
+        );
+
+
+        // -----------------------------
+        // Clear All
+        // -----------------------------
+
+        clearBtn.addEventListener(
+            "click",
+            function() {
+
+                form.reset();
+
+
+                document.querySelector(
+                    'input[value="zero_shot"]'
+                ).checked = true;
+
+
+                emptyState.classList.remove(
+                    "hidden"
+                );
+
+                loading.classList.add(
+                    "hidden"
+                );
+
+                resultContainer.classList.add(
+                    "hidden"
+                );
+
+                errorContainer.classList.add(
+                    "hidden"
+                );
+
+
+                resultSubtitle.textContent =
+                    "Your personalized plan will appear here.";
+
+
+                buttonText.textContent =
+                    "✨ Generate Study Plan";
+
+            }
+        );
+
+
+        // -----------------------------
+        // Technique Name
+        // -----------------------------
+
+        function formatTechnique(technique) {
+
+            if (technique === "zero_shot") {
+                return "🔵 Zero-Shot";
+            }
+
+            if (technique === "few_shot") {
+                return "🟣 Few-Shot";
+            }
+
+            if (technique === "Chain_of_thoughts") {
+                return "🟢 Structured Reasoning";
+            }
+
+            return technique;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+```
