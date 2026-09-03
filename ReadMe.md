@@ -176,7 +176,7 @@ Class_Test_LLM/
 ├── screenshots/
 │   ├── zero_shot.png
 │   ├── few_shot.png
-│   └── structured_reasoning.png
+│   └── structured_COT.png
 │
 ├── templates/
 │   └── index.html
@@ -391,5 +391,5 @@ The application combines **Google Gemini, Python, FastAPI, and a responsive web 
 screenshots/
 ├── zero_shot.png
 ├── few_shot.png
-└── structured_reasoning.png
+└── structured_COT.png
 ````
